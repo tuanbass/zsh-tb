@@ -38,3 +38,8 @@ alias hup='helm upgrade --install'
 alias hun='helm uninstall'
 alias hst='helm status'
 
+helm-list-all-resource() {
+  release_name=$1
+  kubectl get all --all-namespaces -l="app.kubernetes.io/managed-by=Helm,app.kubernetes.io/instance=${release_name}"
+}
+
