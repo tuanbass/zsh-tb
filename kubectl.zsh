@@ -18,6 +18,8 @@ alias kak='kubectl apply -k'
 alias kns='kubectl ns'
 alias kctx='kubectl ctx'
 alias kvu='kubectl view-utilization -h'
+#k8s alias
+alias kk="k9s --logoless"
 
 kgpx() {
 	# kubectl get pods , fzf then execute a command against selected pod
@@ -33,6 +35,15 @@ kgpxx() {
 	shell_command=${*:-"sh"}
 	# command="kubectl exec -it $pod -- $shell_command"
 	command="keti $pod -- $shell_command"
+	echo "$command"
+	eval "$command"
+}
+
+kgpxx-root() {
+	# kubectl get pods , fzf then execute a command against selected pod
+	pod=$(kubectl get pods | fzf | awk '{print $1}')
+	shell_command=${*:-"sh"}
+	command="kubectl pexec -it $pod -- $shell_command"
 	echo "$command"
 	eval "$command"
 }
