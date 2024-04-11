@@ -1,5 +1,3 @@
-# TODO: add a check for helm installation
-# we use helm via mise, so cannot use `command -v helm` during load plugin  
 if (( ! $+commands[helm] )); then
   return
 fi
