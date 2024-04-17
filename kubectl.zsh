@@ -57,3 +57,26 @@ kgpxx-root() {
 	echo "$command"
 	eval "$command"
 }
+
+
+if [ $(command -v kubech) ]; then   
+  
+# Temporary switch the k8s context/namespace for this shell
+  function kkns(){
+    if [ $# = 0 ]; then 
+      selection=$(kubechn |fzf)
+    else 
+      selection=$1
+    fi
+    kubechn $selection
+  }  
+
+  function kkctx(){
+    if [ $# = 0 ]; then 
+      selection=$(kubechc |fzf)
+    else 
+      selection=$1
+    fi
+    kubechc $selection
+  }  
+fi
