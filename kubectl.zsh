@@ -20,6 +20,16 @@ alias kctx='kubectl ctx'
 alias kvu='kubectl view-utilization -h'
 #k8s alias
 alias kk="k9s --logoless"
+kgpf () {
+  pod=$(kubectl get pods | fzf | awk '{print $1}')
+  echo "Copied $pod to the clipboard"
+  echo $pod | clip
+}
+kgpaf () {
+  pod=$(kubectl get pods --all-namespaces | fzf | awk '{print $2}')
+  echo "Copied $pod to the clipboard"
+  echo $pod | clip
+}
 
 kgpx() {
 	# kubectl get pods , fzf then execute a command against selected pod
